@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://your-website-url.example.com/posts/welcome/index.html</loc>
+    <loc>https://albuqr.github.io/myblog/posts/welcome/index.html</loc>
     <lastmod>2025-11-25T01:24:33.267Z</lastmod>
   </url>
   <url>
-    <loc>https://your-website-url.example.com/posts/post-with-code/posts/post-with-code/regressao.html</loc>
+    <loc>https://albuqr.github.io/myblog/posts/post-with-code/posts/post-with-code/regressao.html</loc>
     <lastmod>2025-11-25T01:24:33.265Z</lastmod>
   </url>
   <url>
-    <loc>https://your-website-url.example.com/index.html</loc>
+    <loc>https://albuqr.github.io/myblog/index.html</loc>
     <lastmod>2025-11-25T01:24:33.111Z</lastmod>
   </url>
   <url>
-    <loc>https://your-website-url.example.com/about.html</loc>
+    <loc>https://albuqr.github.io/myblog/about.html</loc>
     <lastmod>2025-11-25T01:24:33.106Z</lastmod>
   </url>
   <url>
-    <loc>https://your-website-url.example.com/posts/post-with-code/dolar.html</loc>
+    <loc>https://albuqr.github.io/myblog/posts/post-with-code/dolar.html</loc>
     <lastmod>2025-11-25T01:24:33.259Z</lastmod>
   </url>
   <url>
-    <loc>https://your-website-url.example.com/posts/post-with-code/posts/testeonibus.html</loc>
+    <loc>https://albuqr.github.io/myblog/posts/post-with-code/posts/testeonibus.html</loc>
     <lastmod>2025-11-25T01:24:33.267Z</lastmod>
   </url>
 </urlset>
