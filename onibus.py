@@ -1,151 +1,122 @@
-
+from datetime import datetime, timedelta
 import os
 import requests
-from dotenv import load_dotenv
-import folium
-from statistics import mean
+from folium import Map, Marker, Icon
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+# carrega variaveis do .env
+load_dotenv(find_dotenv())
 
-SPTRANS_TOKEN = os.getenv("SPTRANS_TOKEN")
-TERMO_BUSCA_LINHA = os.getenv("LINHA_TERMO_BUSCA", "Lapa")
-CODIGO_LINHA = os.getenv("CODIGO_LINHA")
-
-URL = "http://api.olhovivo.sptrans.com.br/v2.1"
+# url base da api sptrans
+API_ONIBUS = "http://api.olhovivo.sptrans.com.br/v2.1"
 
 
-def autsessao():
-    if not SPTRANS_TOKEN:
-        raise ValueError("Token invalido ou não definido")
+def autenticarsessao(token: str):
+    # autentica na api e devolve sessao http
 
-    s = requests.Session()
-    res = s.post(f"{URL}/Login/Autenticar?token={SPTRANS_TOKEN}")
-    if res.text.lower() != "true":
-        raise RuntimeError(f"Falha na autenticação com SPTrans: {res.text}")
-    return s
-
-
-def buscalinha(sessao, termo_busca: str):
-    # busca na api as linhas de onibus e retorna um json
-    res = sessao.get(f"{URL}/Linha/Buscar?termosBusca={termo_busca}")
-    res.raise_for_status()
-    return res.json()
+    sessao = requests.Session()
+    resposta = sessao.post(f"{API_ONIBUS}/Login/Autenticar?token={token}")
+    if resposta.text != "true":
+        raise Exception("falha na autenticacao")
+    return sessao
 
 
-def buscaparadas(sessao, codigo_linha: int | str):
-    # busca na api todas as paradas na linha e retorna um json
-    res = sessao.get(
-        f"{URL}/Parada/BuscarParadasPorLinha?codigoLinha={codigo_linha}"
+def buscacodigolinha(sessao: requests.Session, termo_linha: str):
+    # busca codigo interno da linha a partir do termo
+
+    resp = sessao.get(f"{API_ONIBUS}/Linha/Buscar?termosBusca={termo_linha}")
+    dados_linha = resp.json()
+    return dados_linha[0]["cl"]
+
+
+def buscarparadaslinha(sessao: requests.Session, cod_linha: int):
+    # busca paradas associadas a linha
+
+    resp = sessao.get(
+        f"{API_ONIBUS}/Parada/BuscarParadasPorLinha?codigoLinha={cod_linha}"
     )
-    res.raise_for_status()
-    return res.json()
+    return resp.json()
 
 
-def bucarposicoes(sessao, codigo_linha: int | str):
-    # busca na api a posição do onibus em tempo real 
-    res = sessao.get(f"{URL}/Posicao?codigoLinha={codigo_linha}")
-    res.raise_for_status()
-    dados = res.json()
+def buscarposicaorealtime(sessao: requests.Session, cod_linha: int):
+    # busca posicao em tempo real dos onibus da linha
 
-    # a respostra e linhas = l e veiculos = vs
-    linhas = dados.get("l", [])
-    if not linhas:
-        return []
-
-    veiculos = []
-    for linha in linhas:
-        vs = linha.get("vs", [])
-        for v in vs:
-            veiculos.append(v)
-
-    return veiculos
+    resp = sessao.get(f"{API_ONIBUS}/Posicao/Linha?codigoLinha={cod_linha}")
+    return resp.json()
 
 
-def fazermapa(paradas: list[dict], veiculos: list[dict], nome_arquivo: str):
-    # faz o mapa visual usando o folium, pins azuis são as paradas e os vermelhos são os onibus
-    if not paradas and not veiculos:
-        raise ValueError("Sem dados de paradas ou veículos para montar o mapa.")
+def fazmapa(paradas, posicoes_rt):
+    # monta mapa com paradas e onibus
 
-    coords_lat = []
-    coords_lon = []
+    if paradas:
+        lat_med = sum(p["py"] for p in paradas) / len(paradas)
+        lon_med = sum(p["px"] for p in paradas) / len(paradas)
+        centro_mapa = [lat_med, lon_med]
+    else:
+        centro_mapa = [-23.55052, -46.633308]  # fallback centro sp
 
+    mapa = Map(location=centro_mapa, zoom_start=14)
+    todos_pontos = []
+
+    # marca paradas
     for p in paradas:
-        coords_lat.append(p["py"])
-        coords_lon.append(p["px"])
-
-    for v in veiculos:
-        coords_lat.append(v["py"])
-        coords_lon.append(v["px"])
-
-    centro_lat = mean(coords_lat)
-    centro_lon = mean(coords_lon)
-
-    m = folium.Map(location=[centro_lat, centro_lon], zoom_start=13)
-
-    # camadas para organização visual
-    fg_paradas = folium.FeatureGroup(name="Paradas")
-    fg_veiculos = folium.FeatureGroup(name="Ônibus em tempo real")
-
-    # paradas (pins azuis)
-    for p in paradas:
-        folium.Marker(
+        todos_pontos.append([p["py"], p["px"]])
+        Marker(
             location=[p["py"], p["px"]],
-            popup=f"{p['np']} ({p['ed']})",
-            icon=folium.Icon(color="blue", icon="bus", prefix="fa"),
-        ).add_to(fg_paradas)
+            popup=f"Parada: {p['np']}",
+            icon=Icon(color="blue", icon="info-sign"),
+            z_index_offset=0,
+        ).add_to(mapa)
 
-    # veículos (pins vermelhos)
-    for v in veiculos:
-        prefixo = v.get("p", "sem prefixo")
-        acessivel = v.get("a", False)
-        texto_popup = f"Ônibus {prefixo}"
-        if acessivel:
-            texto_popup += " (acessível)"
+    # marca onibus em tempo real
+    if posicoes_rt.get("vs"):
+        for bus in posicoes_rt["vs"]:
+            todos_pontos.append([bus["py"], bus["px"]])
 
-        folium.Marker(
-            location=[v["py"], v["px"]],
-            popup=texto_popup,
-            icon=folium.Icon(color="red", icon="bus", prefix="fa"),
-        ).add_to(fg_veiculos)
+            utc_time = datetime.fromisoformat(bus["ta"].replace("Z", "+00:00"))
+            br_time = utc_time - timedelta(hours=3)  # utc-3
+            popup_text = f"Onibus: {bus['p']}\nHorario: {br_time.strftime('%H:%M:%S')}"
 
-    fg_paradas.add_to(m)
-    fg_veiculos.add_to(m)
+            Marker(
+                location=[bus["py"], bus["px"]],
+                popup=popup_text,
+                icon=Icon(color="red", icon="bus", prefix="fa"),
+                z_index_offset=1000,
+            ).add_to(mapa)
+    else:
+        Marker(
+            location=centro_mapa,
+            popup="nao ha onibus em tempo real",
+            icon=Icon(color="gray", icon="exclamation-sign"),
+            z_index_offset=1000,
+        ).add_to(mapa)
 
-    folium.LayerControl().add_to(m)
+    # ajusta zoom pelo conjunto de pontos
+    if todos_pontos:
+        mapa.fit_bounds(todos_pontos)
 
-    m.save(nome_arquivo)
-    print(f"Mapa salvo em: {nome_arquivo}")
-
-
-def f():
-    # função principal, pega os dados das outras e organiza, rodando tudo junto
-
-    if not CODIGO_LINHA:
-        raise ValueError("CODIGO_LINHA não definido no .env")
-
-    sessao = autsessao()
-
-    # mostrar linhas do termo de busca 
-    linhas = buscalinha(sessao, TERMO_BUSCA_LINHA)
-    print("Algumas linhas encontradas com o termo de busca:", TERMO_BUSCA_LINHA)
-    for linha in linhas[:5]:
-        print(
-            f"cl={linha.get('cl', linha.get('CodigoLinha'))}, "
-            f"lt={linha.get('lt', linha.get('Letreiro'))}, "
-            f"tp={linha.get('tp', linha.get('DenominacaoTPTS'))}, "
-            f"ts={linha.get('ts', linha.get('DenominacaoTSTP'))}"
-        )
-
-    # paradas e posicoes reais
-    paradas = buscaparadas(sessao, CODIGO_LINHA)
-    veiculos = bucarposicoes(sessao, CODIGO_LINHA)
-
-    print(f"Total de paradas encontradas: {len(paradas)}")
-    print(f"Total de veículos em operação: {len(veiculos)}")
-
-    nome_arquivo = f"mapa_linha_{CODIGO_LINHA}.html"
-    fazermapa(paradas, veiculos, nome_arquivo)
+    return mapa
 
 
-if __name__ == "__main__":
-    f()
+def f(termo_linha: str | None = None):
+    # fluxo principal: autentica, busca dados e monta mapa
+
+    if termo_linha is None:
+        termo_linha = "8000"  # linha padrao
+
+    token_onibus = os.getenv("SPTRANS_TOKEN")
+    if not token_onibus:
+        raise ValueError("variavel SPTRANS_TOKEN nao encontrada no .env")
+
+    sessao = autenticarsessao(token_onibus)
+    cod_linha = buscacodigolinha(sessao, termo_linha)
+    paradas = buscarparadaslinha(sessao, cod_linha)
+    posicoes_rt = buscarposicaorealtime(sessao, cod_linha)
+
+    mapa_onibus = fazmapa(paradas, posicoes_rt)
+    return mapa_onibus
+
+
+# executa fluxo e mostra mapa no post
+mapa = f()
+mapa
