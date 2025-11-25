@@ -1,0 +1,9 @@
+requests
+pandas
+plotly
+plotnine
+python-dotenv
+folium
+ipython
+jupyter
+ipykernel

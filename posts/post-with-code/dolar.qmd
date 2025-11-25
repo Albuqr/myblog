@@ -1,0 +1,115 @@
+---
+title: "Cotação do Dólar por Período"
+description: "Consulta à API PTAX do Banco Central e geração de gráfico interativo"
+date: "2025-02-01"
+format:
+  html:
+    embed-resources: true
+jupyter: python3
+execute:
+  echo: true
+  eval: true
+  warning: true
+  message: true
+---
+
+```{python}
+import os
+import calendar
+from datetime import datetime
+
+import requests
+import pandas as pd
+import plotly.express as px
+from dotenv import load_dotenv
+
+load_dotenv()  # carrega variaveis do .env
+
+BCB_API = os.getenv(
+    "BCB_API",
+    "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata"
+)
+
+BCB_DOLAR_ENDPOINT = os.getenv(
+    "BCB_DOLAR_ENDPOINT",
+    "CotacaoDolarPeriodo(dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)"
+)
+
+MES_ANO = os.getenv("DOLAR_MES_ANO")  # mes e ano alvo
+
+
+def datas_mes(mmyyyy: str):
+    # retorna primeiro e ultimo dia do mes
+
+    primeiro = datetime.strptime(mmyyyy, "%m%Y")
+    ultimodia = calendar.monthrange(primeiro.year, primeiro.month)[1]
+    ultimo = primeiro.replace(day=ultimodia)
+    return primeiro, ultimo
+
+
+def dolardados(mmyyyy: str):
+    # consulta dados do dolar no periodo
+
+    inicio, fim = datas_mes(mmyyyy)
+
+    # monta url da api
+    url = (
+        f"{BCB_API}/"
+        f"{BCB_DOLAR_ENDPOINT}?"
+        f"@dataInicial='{inicio.strftime('%m-%d-%Y')}'&"
+        f"@dataFinalCotacao='{fim.strftime('%m-%d-%Y')}'&"
+        "$top=10000&$format=json"
+    )
+
+    resposta = requests.get(url)
+    resposta.raise_for_status()
+    dados = resposta.json()["value"]
+    return dados
+
+
+def organizardados(dados, mmyyyy: str):
+    # organiza json em dataframe com calendario do mes
+
+    df = pd.DataFrame(dados)
+    df["data"] = pd.to_datetime(df["dataHoraCotacao"]).dt.date
+    df = df[["data", "cotacaoVenda"]].sort_values("data")
+
+    inicio, fim = datas_mes(mmyyyy)
+    calendario = pd.date_range(start=inicio, end=fim).date
+    df_full = pd.DataFrame({"data": calendario})
+
+    df_full = df_full.merge(df, on="data", how="left")
+
+    df_full["cotacaoVenda"] = df_full["cotacaoVenda"].ffill()  # preenche dias sem cotacao
+
+    return df_full
+
+
+def plot(df: pd.DataFrame, mmyyyy: str):
+    # gera grafico da cotacao do dolar
+
+    titulo = f"Cotacao do Dolar – {mmyyyy[:2]}/{mmyyyy[2:]}"
+    fig = px.line(df, x="data", y="cotacaoVenda", title=titulo)
+    fig.update_layout(
+        xaxis_title="Data",
+        yaxis_title="Cotacao de venda (R$)"
+    )
+    return fig
+
+
+def f(mmyyyy: str | None = None):
+    # fluxo principal do codigo
+
+    if mmyyyy is None:
+        mmyyyy = MES_ANO
+
+    dados = dolardados(mmyyyy)
+    df_tratado = organizardados(dados, mmyyyy)
+    fig = plot(df_tratado, mmyyyy)
+    fig.show()
+    return df_tratado, fig
+
+
+# executa rotina principal ao carregar
+df_final, fig = f()
+```

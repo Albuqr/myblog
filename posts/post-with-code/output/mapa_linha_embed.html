@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5de8ec07416d74d145a1b06cb8f08b66 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_5de8ec07416d74d145a1b06cb8f08b66" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5de8ec07416d74d145a1b06cb8f08b66 = L.map(
+                "map_5de8ec07416d74d145a1b06cb8f08b66",
+                {
+                    center: [-23.529201337499998, -46.6746216125],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f1d6aa69cbc596950af36950d479b46b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f1d6aa69cbc596950af36950d479b46b.addTo(map_5de8ec07416d74d145a1b06cb8f08b66);
+        
+    
+            var feature_group_4d7e9bb604c7620430a302d45a312cd3 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_42a2dfdc08cc494d22230e988d0befbf = L.marker(
+                [-23.534564, -46.654302],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_6925e3915c297086ff199514c8219f4f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3b2802ad2c3bfa5d3a9fd7a8b03102e0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a0a178f65e03b8ab8049559ef25c693e = $(`<div id="html_a0a178f65e03b8ab8049559ef25c693e" style="width: 100.0%; height: 100.0%;">ANGELICA B/C (AV   ANGELICA)</div>`)[0];
+                popup_3b2802ad2c3bfa5d3a9fd7a8b03102e0.setContent(html_a0a178f65e03b8ab8049559ef25c693e);
+            
+        
+
+        marker_42a2dfdc08cc494d22230e988d0befbf.bindPopup(popup_3b2802ad2c3bfa5d3a9fd7a8b03102e0)
+        ;
+
+        
+    
+    
+                marker_42a2dfdc08cc494d22230e988d0befbf.setIcon(icon_6925e3915c297086ff199514c8219f4f);
+            
+    
+            var marker_40c96edccc8198cab1d741be97eb0acc = L.marker(
+                [-23.525799, -46.679251],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_e30885f312053aa694f4303a06481a33 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8e823b4586e4c3c75d583374e609a9c5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f2b60062c2a24469ee2d89f544045be0 = $(`<div id="html_f2b60062c2a24469ee2d89f544045be0" style="width: 100.0%; height: 100.0%;">PARADA PALMEIRAS B/C (R PADRE ANTONIO TOMAS/ AV POMPEIA)</div>`)[0];
+                popup_8e823b4586e4c3c75d583374e609a9c5.setContent(html_f2b60062c2a24469ee2d89f544045be0);
+            
+        
+
+        marker_40c96edccc8198cab1d741be97eb0acc.bindPopup(popup_8e823b4586e4c3c75d583374e609a9c5)
+        ;
+
+        
+    
+    
+                marker_40c96edccc8198cab1d741be97eb0acc.setIcon(icon_e30885f312053aa694f4303a06481a33);
+            
+    
+            var marker_e2a51db5f58776c4647d8a9967fc0fd8 = L.marker(
+                [-23.526523, -46.673588],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_01709fc40a71c1eb08e950e6933bdb61 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7fe5171a3491c58147f815e068ac80fe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_74c8721d1360348219085e0a447d5d00 = $(`<div id="html_74c8721d1360348219085e0a447d5d00" style="width: 100.0%; height: 100.0%;">ANTARTICA B/C (PC SOUSA ARANHA/ VDTO ANTARTICA)</div>`)[0];
+                popup_7fe5171a3491c58147f815e068ac80fe.setContent(html_74c8721d1360348219085e0a447d5d00);
+            
+        
+
+        marker_e2a51db5f58776c4647d8a9967fc0fd8.bindPopup(popup_7fe5171a3491c58147f815e068ac80fe)
+        ;
+
+        
+    
+    
+                marker_e2a51db5f58776c4647d8a9967fc0fd8.setIcon(icon_01709fc40a71c1eb08e950e6933bdb61);
+            
+    
+            var marker_b64188ebcef53e298fa53aabe0b4d39a = L.marker(
+                [-23.528131, -46.670652],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_55a3814910f56c598ce5b5fae2023bd9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ac9e97d72eb0f49b6eab6d2cd3f08b43 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e9f5f7ad19a76f022fc26db75159449 = $(`<div id="html_6e9f5f7ad19a76f022fc26db75159449" style="width: 100.0%; height: 100.0%;">BABY BARIONY B/C (R DONA GERMAINE BUCHARD/ R MINISTRO GODOI)</div>`)[0];
+                popup_ac9e97d72eb0f49b6eab6d2cd3f08b43.setContent(html_6e9f5f7ad19a76f022fc26db75159449);
+            
+        
+
+        marker_b64188ebcef53e298fa53aabe0b4d39a.bindPopup(popup_ac9e97d72eb0f49b6eab6d2cd3f08b43)
+        ;
+
+        
+    
+    
+                marker_b64188ebcef53e298fa53aabe0b4d39a.setIcon(icon_55a3814910f56c598ce5b5fae2023bd9);
+            
+    
+            var marker_928afd2af9490396a21982d20e0986eb = L.marker(
+                [-23.53021, -46.6669],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_eda1be6aba7cb53f4c218ef623f9e15b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4d99cf1c14fb4b733f1081bf586fde81 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2e6e8b997e361dce37da93f29a877789 = $(`<div id="html_2e6e8b997e361dce37da93f29a877789" style="width: 100.0%; height: 100.0%;">PQ. DA ÁGUA BRANCA B/C (R MINISTRO GODOI/ R LINCOLN ALBUQUERQUE)</div>`)[0];
+                popup_4d99cf1c14fb4b733f1081bf586fde81.setContent(html_2e6e8b997e361dce37da93f29a877789);
+            
+        
+
+        marker_928afd2af9490396a21982d20e0986eb.bindPopup(popup_4d99cf1c14fb4b733f1081bf586fde81)
+        ;
+
+        
+    
+    
+                marker_928afd2af9490396a21982d20e0986eb.setIcon(icon_eda1be6aba7cb53f4c218ef623f9e15b);
+            
+    
+            var marker_8c0615b490dff5a9d3e989afd13150f3 = L.marker(
+                [-23.52494, -46.698995],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_b44b18de22403e261d5447aae4dc1ec4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_05802da5e629bfab5b01b5c8c74a3b03 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b5cb321c0b9593981b5daaac56b7b658 = $(`<div id="html_b5cb321c0b9593981b5daaac56b7b658" style="width: 100.0%; height: 100.0%;">SCIPIAO B/C (R SCIPIAO/ R AURELIA)</div>`)[0];
+                popup_05802da5e629bfab5b01b5c8c74a3b03.setContent(html_b5cb321c0b9593981b5daaac56b7b658);
+            
+        
+
+        marker_8c0615b490dff5a9d3e989afd13150f3.bindPopup(popup_05802da5e629bfab5b01b5c8c74a3b03)
+        ;
+
+        
+    
+    
+                marker_8c0615b490dff5a9d3e989afd13150f3.setIcon(icon_b44b18de22403e261d5447aae4dc1ec4);
+            
+    
+            var marker_e098fc4cc7fedf7bee22b36258a1d629 = L.marker(
+                [-23.524994, -46.695297],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_10405aa3d13ea61ff88d05f23dbea87b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_16a34040e1a15bbc1c208edcfa48899c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7c8ea3e6f2350d429781e096954678bb = $(`<div id="html_7c8ea3e6f2350d429781e096954678bb" style="width: 100.0%; height: 100.0%;">VESPASIANO B/C (R VESPASIANO/ R CAIO GRACO)</div>`)[0];
+                popup_16a34040e1a15bbc1c208edcfa48899c.setContent(html_7c8ea3e6f2350d429781e096954678bb);
+            
+        
+
+        marker_e098fc4cc7fedf7bee22b36258a1d629.bindPopup(popup_16a34040e1a15bbc1c208edcfa48899c)
+        ;
+
+        
+    
+    
+                marker_e098fc4cc7fedf7bee22b36258a1d629.setIcon(icon_10405aa3d13ea61ff88d05f23dbea87b);
+            
+    
+            var marker_aa0aa0f799c1c29ec0633741388fac46 = L.marker(
+                [-23.525029, -46.690074],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_74183a02faa876678bbdb373e1ab8856 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_86fc841cc1ed5d8b17257e6449d488dd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_311ea24e2509e5e8b9f95e16c4c9b33a = $(`<div id="html_311ea24e2509e5e8b9f95e16c4c9b33a" style="width: 100.0%; height: 100.0%;">CORNELIA (R CLAUDIO/ R CRASSO)</div>`)[0];
+                popup_86fc841cc1ed5d8b17257e6449d488dd.setContent(html_311ea24e2509e5e8b9f95e16c4c9b33a);
+            
+        
+
+        marker_aa0aa0f799c1c29ec0633741388fac46.bindPopup(popup_86fc841cc1ed5d8b17257e6449d488dd)
+        ;
+
+        
+    
+    
+                marker_aa0aa0f799c1c29ec0633741388fac46.setIcon(icon_74183a02faa876678bbdb373e1ab8856);
+            
+    
+            var marker_3d59419669e12e8a9be54953b9accdc0 = L.marker(
+                [-23.523407, -46.700541],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_b9dea87105ddf91190ddb8f1185fc388 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4056d17f323d52ac9397052b263c43ed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f62d6e3e9717fd7a9d79723b29c46e70 = $(`<div id="html_f62d6e3e9717fd7a9d79723b29c46e70" style="width: 100.0%; height: 100.0%;">CATAO B/C (R FAUSTOLO/ R ROMA)</div>`)[0];
+                popup_4056d17f323d52ac9397052b263c43ed.setContent(html_f62d6e3e9717fd7a9d79723b29c46e70);
+            
+        
+
+        marker_3d59419669e12e8a9be54953b9accdc0.bindPopup(popup_4056d17f323d52ac9397052b263c43ed)
+        ;
+
+        
+    
+    
+                marker_3d59419669e12e8a9be54953b9accdc0.setIcon(icon_b9dea87105ddf91190ddb8f1185fc388);
+            
+    
+            var marker_7307ffd7dece7f154ed39f5b73325866 = L.marker(
+                [-23.52517, -46.683408],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_2df6cc08fc5019d0b7550c8dfd30f190 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_928176d55a764fbad7bacd0d70b79264 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d3182ebd3f2f5a5bcb6f3382088ad3d4 = $(`<div id="html_d3182ebd3f2f5a5bcb6f3382088ad3d4" style="width: 100.0%; height: 100.0%;">SESC POMPEIA B/C (R TURIASSU/ R BARAO DO BANANAL)</div>`)[0];
+                popup_928176d55a764fbad7bacd0d70b79264.setContent(html_d3182ebd3f2f5a5bcb6f3382088ad3d4);
+            
+        
+
+        marker_7307ffd7dece7f154ed39f5b73325866.bindPopup(popup_928176d55a764fbad7bacd0d70b79264)
+        ;
+
+        
+    
+    
+                marker_7307ffd7dece7f154ed39f5b73325866.setIcon(icon_2df6cc08fc5019d0b7550c8dfd30f190);
+            
+    
+            var marker_3c0a438d069ebc0b69ebbff803a19e70 = L.marker(
+                [-23.540545, -46.643624],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_e380b2f89e4312220486db6c5c7f15f5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b8f99b67e084fae20bd0198423e04b8a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_67eb6eab6477d8febd8a2a3d0b25c87a = $(`<div id="html_67eb6eab6477d8febd8a2a3d0b25c87a" style="width: 100.0%; height: 100.0%;">VITORIA B/C (R VITORIA/ AL BARAO DE CAMPINAS)</div>`)[0];
+                popup_b8f99b67e084fae20bd0198423e04b8a.setContent(html_67eb6eab6477d8febd8a2a3d0b25c87a);
+            
+        
+
+        marker_3c0a438d069ebc0b69ebbff803a19e70.bindPopup(popup_b8f99b67e084fae20bd0198423e04b8a)
+        ;
+
+        
+    
+    
+                marker_3c0a438d069ebc0b69ebbff803a19e70.setIcon(icon_e380b2f89e4312220486db6c5c7f15f5);
+            
+    
+            var marker_88dd2c06613f1a4e88f028740791a3ad = L.marker(
+                [-23.532847, -46.657404],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_f6c4c9bea967e8b361a8b1b544f4fd39 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_14b0914e3905a200163dd13b000c91b0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_926401fb3e06da06c88d6a80de7ea99c = $(`<div id="html_926401fb3e06da06c88d6a80de7ea99c" style="width: 100.0%; height: 100.0%;">ROSA E SILVA C/B (R OLIMPIA DE ALMEIDA PRADO/ R LOPES DE OLIVEIRA)</div>`)[0];
+                popup_14b0914e3905a200163dd13b000c91b0.setContent(html_926401fb3e06da06c88d6a80de7ea99c);
+            
+        
+
+        marker_88dd2c06613f1a4e88f028740791a3ad.bindPopup(popup_14b0914e3905a200163dd13b000c91b0)
+        ;
+
+        
+    
+    
+                marker_88dd2c06613f1a4e88f028740791a3ad.setIcon(icon_f6c4c9bea967e8b361a8b1b544f4fd39);
+            
+    
+            var marker_0fa1b5b7c78e5e584b2bacd14ac905c7 = L.marker(
+                [-23.538708, -46.646888],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_4642a7871a78199be174e2271d0b8b90 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b61db3f60975ec4590b2dd6a559969c5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_572104307bf479df00e9efd0e267f113 = $(`<div id="html_572104307bf479df00e9efd0e267f113" style="width: 100.0%; height: 100.0%;">ANA CINTRA B/C (R DOUTOR FREDERICO STEIDEL/ AV DUQUE DE CAXIAS)</div>`)[0];
+                popup_b61db3f60975ec4590b2dd6a559969c5.setContent(html_572104307bf479df00e9efd0e267f113);
+            
+        
+
+        marker_0fa1b5b7c78e5e584b2bacd14ac905c7.bindPopup(popup_b61db3f60975ec4590b2dd6a559969c5)
+        ;
+
+        
+    
+    
+                marker_0fa1b5b7c78e5e584b2bacd14ac905c7.setIcon(icon_4642a7871a78199be174e2271d0b8b90);
+            
+    
+            var marker_a995bc2a4263c7e01868f1991e42a87b = L.marker(
+                [-23.532068, -46.660957],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_1abfd1b34f24fed5cac2788c72e0cc53 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a84873e5184f54390f26f842b014bc5a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_100236a97dfec90cb6d39292eb351131 = $(`<div id="html_100236a97dfec90cb6d39292eb351131" style="width: 100.0%; height: 100.0%;">PACAEMBU B/C (R FRANCISCO ESTACIO FORTES/ AV PACAEMBU)</div>`)[0];
+                popup_a84873e5184f54390f26f842b014bc5a.setContent(html_100236a97dfec90cb6d39292eb351131);
+            
+        
+
+        marker_a995bc2a4263c7e01868f1991e42a87b.bindPopup(popup_a84873e5184f54390f26f842b014bc5a)
+        ;
+
+        
+    
+    
+                marker_a995bc2a4263c7e01868f1991e42a87b.setIcon(icon_1abfd1b34f24fed5cac2788c72e0cc53);
+            
+    
+            var marker_477a70e2c750a510139e880b0870866d = L.marker(
+                [-23.536318, -46.651201],
+                {
+}
+            ).addTo(feature_group_4d7e9bb604c7620430a302d45a312cd3);
+        
+    
+            var icon_85a8241cefc17d5c4225afa6342493ec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_03f055bc84ed432bc7e1c023b88d3fe6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2109f49fe483fa0e8e0785dec3839b12 = $(`<div id="html_2109f49fe483fa0e8e0785dec3839b12" style="width: 100.0%; height: 100.0%;">NOTHMANN C/B (R GENERAL JULIO MARCONDES SALGADO/ AL NOTHMANN)</div>`)[0];
+                popup_03f055bc84ed432bc7e1c023b88d3fe6.setContent(html_2109f49fe483fa0e8e0785dec3839b12);
+            
+        
+
+        marker_477a70e2c750a510139e880b0870866d.bindPopup(popup_03f055bc84ed432bc7e1c023b88d3fe6)
+        ;
+
+        
+    
+    
+                marker_477a70e2c750a510139e880b0870866d.setIcon(icon_85a8241cefc17d5c4225afa6342493ec);
+            
+    
+            feature_group_4d7e9bb604c7620430a302d45a312cd3.addTo(map_5de8ec07416d74d145a1b06cb8f08b66);
+        
+    
+            var feature_group_adfca7aa101ae0f134c6f15ccb34ac61 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_c26e2cdd7a1c0c87fbaf9c1f8d050f34 = L.marker(
+                [-23.520449499999998, -46.6996115],
+                {
+}
+            ).addTo(feature_group_adfca7aa101ae0f134c6f15ccb34ac61);
+        
+    
+            var icon_c4fb36c9611e3bab2deded48c7beba68 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_941ccef675ab39018de1d17c6e3898fd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b906b1a08cd75475d9e6faca44cb9cb = $(`<div id="html_7b906b1a08cd75475d9e6faca44cb9cb" style="width: 100.0%; height: 100.0%;">Ônibus 12732</div>`)[0];
+                popup_941ccef675ab39018de1d17c6e3898fd.setContent(html_7b906b1a08cd75475d9e6faca44cb9cb);
+            
+        
+
+        marker_c26e2cdd7a1c0c87fbaf9c1f8d050f34.bindPopup(popup_941ccef675ab39018de1d17c6e3898fd)
+        ;
+
+        
+    
+    
+                marker_c26e2cdd7a1c0c87fbaf9c1f8d050f34.setIcon(icon_c4fb36c9611e3bab2deded48c7beba68);
+            
+    
+            var marker_479acf2bfffb761996a2af9668620eae = L.marker(
+                [-23.547649, -46.641011500000005],
+                {
+}
+            ).addTo(feature_group_adfca7aa101ae0f134c6f15ccb34ac61);
+        
+    
+            var icon_2caaa31e4dbad59fb5c5b1fff5d24041 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_631a21162129ee337a01cd03c63d01d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eb3c4394cbc0d8d6f1d01204905f5140 = $(`<div id="html_eb3c4394cbc0d8d6f1d01204905f5140" style="width: 100.0%; height: 100.0%;">Ônibus 12534</div>`)[0];
+                popup_631a21162129ee337a01cd03c63d01d5.setContent(html_eb3c4394cbc0d8d6f1d01204905f5140);
+            
+        
+
+        marker_479acf2bfffb761996a2af9668620eae.bindPopup(popup_631a21162129ee337a01cd03c63d01d5)
+        ;
+
+        
+    
+    
+                marker_479acf2bfffb761996a2af9668620eae.setIcon(icon_2caaa31e4dbad59fb5c5b1fff5d24041);
+            
+    
+            var marker_864958a2a73266f3421419eda916c2bd = L.marker(
+                [-23.52577625, -46.67950425],
+                {
+}
+            ).addTo(feature_group_adfca7aa101ae0f134c6f15ccb34ac61);
+        
+    
+            var icon_6db7b54c88b314459e48e555d89f4025 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cde486ffc5744c14efab14ef3a841e10 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cb928ce52419aded53220843c8bbc045 = $(`<div id="html_cb928ce52419aded53220843c8bbc045" style="width: 100.0%; height: 100.0%;">Ônibus 12601</div>`)[0];
+                popup_cde486ffc5744c14efab14ef3a841e10.setContent(html_cb928ce52419aded53220843c8bbc045);
+            
+        
+
+        marker_864958a2a73266f3421419eda916c2bd.bindPopup(popup_cde486ffc5744c14efab14ef3a841e10)
+        ;
+
+        
+    
+    
+                marker_864958a2a73266f3421419eda916c2bd.setIcon(icon_6db7b54c88b314459e48e555d89f4025);
+            
+    
+            var marker_6557ec6646739fb0e7fbe9f6dee5125e = L.marker(
+                [-23.520449499999998, -46.6996115],
+                {
+}
+            ).addTo(feature_group_adfca7aa101ae0f134c6f15ccb34ac61);
+        
+    
+            var icon_3aa56441b6db3fa3294802f53262a0ad = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6fc3d829d6073a3864870b0a44b96783 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6a6fc9e3ad33192558065465d675e56 = $(`<div id="html_f6a6fc9e3ad33192558065465d675e56" style="width: 100.0%; height: 100.0%;">Ônibus 12533</div>`)[0];
+                popup_6fc3d829d6073a3864870b0a44b96783.setContent(html_f6a6fc9e3ad33192558065465d675e56);
+            
+        
+
+        marker_6557ec6646739fb0e7fbe9f6dee5125e.bindPopup(popup_6fc3d829d6073a3864870b0a44b96783)
+        ;
+
+        
+    
+    
+                marker_6557ec6646739fb0e7fbe9f6dee5125e.setIcon(icon_3aa56441b6db3fa3294802f53262a0ad);
+            
+    
+            var marker_49595bc33597e280d2d0bbc12d828da6 = L.marker(
+                [-23.520449499999998, -46.6996115],
+                {
+}
+            ).addTo(feature_group_adfca7aa101ae0f134c6f15ccb34ac61);
+        
+    
+            var icon_0660c8f15c6d2da6b86f22c1369ba329 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d334f91bcddad916ff42a739f9716792 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_889059b52a14603ce606d9e0c0c9426f = $(`<div id="html_889059b52a14603ce606d9e0c0c9426f" style="width: 100.0%; height: 100.0%;">Ônibus 12519</div>`)[0];
+                popup_d334f91bcddad916ff42a739f9716792.setContent(html_889059b52a14603ce606d9e0c0c9426f);
+            
+        
+
+        marker_49595bc33597e280d2d0bbc12d828da6.bindPopup(popup_d334f91bcddad916ff42a739f9716792)
+        ;
+
+        
+    
+    
+                marker_49595bc33597e280d2d0bbc12d828da6.setIcon(icon_0660c8f15c6d2da6b86f22c1369ba329);
+            
+    
+            feature_group_adfca7aa101ae0f134c6f15ccb34ac61.addTo(map_5de8ec07416d74d145a1b06cb8f08b66);
+        
+    
+            var layer_control_d10541a391e971a95266e3d9cc19ff9d_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_f1d6aa69cbc596950af36950d479b46b,
+                },
+                overlays :  {
+                    "Paradas" : feature_group_4d7e9bb604c7620430a302d45a312cd3,
+                    "\u00d4nibus em Tempo Real" : feature_group_adfca7aa101ae0f134c6f15ccb34ac61,
+                },
+            };
+            let layer_control_d10541a391e971a95266e3d9cc19ff9d = L.control.layers(
+                layer_control_d10541a391e971a95266e3d9cc19ff9d_layers.base_layers,
+                layer_control_d10541a391e971a95266e3d9cc19ff9d_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_5de8ec07416d74d145a1b06cb8f08b66);
+
+        
+</script>
+</html>
