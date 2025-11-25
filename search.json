@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/post-with-code/posts/post-with-code/regressao.html",
+    "href": "posts/post-with-code/posts/post-with-code/regressao.html",
+    "title": "Regressao Linear com Plotnine",
+    "section": "",
+    "text": "import os\nimport requests\nfrom io import StringIO\n\nimport numpy as np\nimport pandas as pd\nfrom dotenv import load_dotenv, find_dotenv\nfrom plotnine import ggplot, aes, geom_point, geom_abline, theme, element_text, ggsave\nfrom IPython.display import Image, display  # mostra a imagem no post\n\n# carrega variaveis do arquivo .env\nload_dotenv(find_dotenv())\n\nURLX = os.getenv(\"URL_X\")\nURLY = os.getenv(\"URL_Y\")\n\n\ndef carregardados(urlx: str, urly: str):\n    # carrega vetores x e y dos arquivos\n\n    if not urlx or not urly:\n        raise ValueError(\"urlx ou urly invalido\")\n\n    # limpa espacos e aspas\n    urlx = urlx.strip().strip('\"').strip(\"'\")\n    urly = urly.strip().strip('\"').strip(\"'\")\n\n    # se arquivo local, abre direto\n    if os.path.isfile(urlx):\n        with open(urlx, \"r\", encoding=\"utf-8\") as f:\n            x = np.loadtxt(StringIO(f.read()))\n    else:\n        resp_x = requests.get(urlx)\n        resp_x.raise_for_status()\n        x = np.loadtxt(StringIO(resp_x.text))\n\n    if os.path.isfile(urly):\n        with open(urly, \"r\", encoding=\"utf-8\") as f:\n            y = np.loadtxt(StringIO(f.read()))\n    else:\n        resp_y = requests.get(urly)\n        resp_y.raise_for_status()\n        y = np.loadtxt(StringIO(resp_y.text))\n\n    x = np.asarray(x).ravel()\n    y = np.asarray(y).ravel()\n\n    if x.shape[0] != y.shape[0]:\n        raise ValueError(\"tamanhos diferentes entre x e y\")\n\n    return x, y\n\n\ndef regressaomatriz(x: np.ndarray, y: np.ndarray):\n    # calcula coeficientes da regressao linear\n\n    X = np.column_stack((np.ones_like(x), x))\n\n    XtX = X.T @ X\n    XtX_inv = np.linalg.inv(XtX)\n    Xty = X.T @ y\n    beta = XtX_inv @ Xty\n\n    a = float(beta[0])  # intercepto\n    b = float(beta[1])  # inclinacao\n\n    return a, b\n\n\ndef fazgrafico(\n    x: np.ndarray,\n    y: np.ndarray,\n    a: float,\n    b: float,\n    nome_arquivo: str = \"grafico_regressao.png\",\n):\n    # monta o grafico com pontos e a reta de regressao\n\n    df = pd.DataFrame({\"x\": x, \"y\": y})\n\n    plot = (\n        ggplot(df, aes(\"x\", \"y\"))\n        + geom_point()\n        + geom_abline(intercept=a, slope=b)\n        + theme(\n            axis_title_x=element_text(size=12),\n            axis_title_y=element_text(size=12),\n            figure_size=(6, 4),\n        )\n    )\n\n    # salva imagem\n    ggsave(plot, filename=nome_arquivo, dpi=300)\n\n    return plot\n\n\ndef f(url_x: str | None = None, url_y: str | None = None):\n    # fluxo principal do codigo\n\n    if url_x is None:\n        url_x = URLX\n    if url_y is None:\n        url_y = URLY\n\n    x, y = carregardados(url_x, url_y)\n    a, b = regressaomatriz(x, y)\n\n    print(f\"intercepto (a): {a}\")\n    print(f\"inclinacao (b): {b}\")\n\n    plot = fazgrafico(x, y, a, b)\n    print(\"grafico salvo em grafico_regressao.png\")\n\n    return a, b, plot\n\n\n# executa o fluxo principal\na, b, plot = f()\n\n# exibe a imagem no post\ndisplay(Image(\"grafico_regressao.png\"))\n\nintercepto (a): 373.93446839132355\ninclinacao (b): 991.6278332981952\n\n\n/home/codespace/.python/current/lib/python3.12/site-packages/plotnine/ggplot.py:623: PlotnineWarning: Saving 6 x 4 in image.\n/home/codespace/.python/current/lib/python3.12/site-packages/plotnine/ggplot.py:624: PlotnineWarning: Filename: grafico_regressao.png\n\n\ngrafico salvo em grafico_regressao.png"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "myblog",
+    "section": "",
+    "text": "Welcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 19, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nCotação do Dólar por Período\n\n\nConsulta à API PTAX do Banco Central e geração de gráfico interativo\n\n\n\n\n\nFeb 1, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nRegressao Linear com Plotnine\n\n\ncarrega dados de x e y, calcula regressao linear e gera grafico com plotnine\n\n\n\n\n\nFeb 1, 2025\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/post-with-code/dolar.html",
+    "href": "posts/post-with-code/dolar.html",
+    "title": "Cotação do Dólar por Período",
+    "section": "",
+    "text": "import os\nimport calendar\nfrom datetime import datetime\n\nimport requests\nimport pandas as pd\nimport plotly.express as px\nfrom dotenv import load_dotenv\n\nload_dotenv()  # carrega variaveis do .env\n\nBCB_API = os.getenv(\n    \"BCB_API\",\n    \"https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata\"\n)\n\nBCB_DOLAR_ENDPOINT = os.getenv(\n    \"BCB_DOLAR_ENDPOINT\",\n    \"CotacaoDolarPeriodo(dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)\"\n)\n\nMES_ANO = os.getenv(\"DOLAR_MES_ANO\")  # mes e ano alvo\n\n\ndef datas_mes(mmyyyy: str):\n    # retorna primeiro e ultimo dia do mes\n\n    primeiro = datetime.strptime(mmyyyy, \"%m%Y\")\n    ultimodia = calendar.monthrange(primeiro.year, primeiro.month)[1]\n    ultimo = primeiro.replace(day=ultimodia)\n    return primeiro, ultimo\n\n\ndef dolardados(mmyyyy: str):\n    # consulta dados do dolar no periodo\n\n    inicio, fim = datas_mes(mmyyyy)\n\n    # monta url da api\n    url = (\n        f\"{BCB_API}/\"\n        f\"{BCB_DOLAR_ENDPOINT}?\"\n        f\"@dataInicial='{inicio.strftime('%m-%d-%Y')}'&\"\n        f\"@dataFinalCotacao='{fim.strftime('%m-%d-%Y')}'&\"\n        \"$top=10000&$format=json\"\n    )\n\n    resposta = requests.get(url)\n    resposta.raise_for_status()\n    dados = resposta.json()[\"value\"]\n    return dados\n\n\ndef organizardados(dados, mmyyyy: str):\n    # organiza json em dataframe com calendario do mes\n\n    df = pd.DataFrame(dados)\n    df[\"data\"] = pd.to_datetime(df[\"dataHoraCotacao\"]).dt.date\n    df = df[[\"data\", \"cotacaoVenda\"]].sort_values(\"data\")\n\n    inicio, fim = datas_mes(mmyyyy)\n    calendario = pd.date_range(start=inicio, end=fim).date\n    df_full = pd.DataFrame({\"data\": calendario})\n\n    df_full = df_full.merge(df, on=\"data\", how=\"left\")\n\n    df_full[\"cotacaoVenda\"] = df_full[\"cotacaoVenda\"].ffill()  # preenche dias sem cotacao\n\n    return df_full\n\n\ndef plot(df: pd.DataFrame, mmyyyy: str):\n    # gera grafico da cotacao do dolar\n\n    titulo = f\"Cotacao do Dolar – {mmyyyy[:2]}/{mmyyyy[2:]}\"\n    fig = px.line(df, x=\"data\", y=\"cotacaoVenda\", title=titulo)\n    fig.update_layout(\n        xaxis_title=\"Data\",\n        yaxis_title=\"Cotacao de venda (R$)\"\n    )\n    return fig\n\n\ndef f(mmyyyy: str | None = None):\n    # fluxo principal do codigo\n\n    if mmyyyy is None:\n        mmyyyy = MES_ANO\n\n    dados = dolardados(mmyyyy)\n    df_tratado = organizardados(dados, mmyyyy)\n    fig = plot(df_tratado, mmyyyy)\n    fig.show()\n    return df_tratado, fig\n\n\n# executa rotina principal ao carregar\ndf_final, fig = f()"
+  }
+]
